@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getAuth, updateProfile, updateEmail } from "firebase/auth";
 import { updateDoc, doc } from "firebase/firestore";

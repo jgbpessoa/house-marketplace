@@ -39,10 +39,11 @@ function Listing() {
     <main>
       <Swiper
         slidesPerView={1}
-        pagination={{ clickable: true, dynamicBullets: true }}
-        navigation={true}
         modules={[Pagination, Navigation, Scrollbar, A11y]}
-        style={{ height: "35vh" }}
+        pagination={{ clickable: true, dynamicBullets: true }}
+        loop={true}
+        navigation={true}
+        className="swiper-container"
       >
         {listing.imgUrls.map((url, index) => (
           <SwiperSlide key={index}>

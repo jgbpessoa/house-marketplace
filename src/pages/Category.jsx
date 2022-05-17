@@ -17,6 +17,10 @@ import Spinner from "../components/Spinner";
 function Category() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lastFetchedListing, setLastFetchedListing] = useState(null);
+  const [totalListings, setTotalListings] = useState(0);
+  const [loadMore, setLoadMore] = useState(false);
+  const fetchLimit = 5;
 
   const params = useParams();
 
@@ -26,26 +30,42 @@ function Category() {
         // Get reference
         const listingRef = collection(db, "listings");
 
-        // Create a query
+        // Create a query to get total number of listings
+        const qTotal = query(
+          listingRef,
+          where("type", "==", params.categoryName),
+          orderBy("timestamp", "desc")
+        );
+
+        // Execute query
+        const querySnapTotal = await getDocs(qTotal);
+        querySnapTotal.size > fetchLimit && setLoadMore(true);
+        setTotalListings(querySnapTotal.size);
+
+        // Create a query to load listings
         const q = query(
           listingRef,
           where("type", "==", params.categoryName),
           orderBy("timestamp", "desc"),
-          limit(10)
+          limit(fetchLimit)
         );
 
         // Execute query
         const querySnap = await getDocs(q);
 
-        const listings = [];
+        // Get last rendered listing
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        setLastFetchedListing(lastVisible);
+
+        const listingsArr = [];
         querySnap.forEach((doc) => {
-          return listings.push({
+          return listingsArr.push({
             id: doc.id,
             data: doc.data(),
           });
         });
 
-        setListings(listings);
+        setListings(listingsArr);
         setLoading(false);
       } catch (error) {
         toast.error("Could not fetch listings");
@@ -54,6 +74,45 @@ function Category() {
 
     fetchListings();
   }, [params.categoryName]);
+
+  // Pagination / Load More
+  const onFetchMoreListings = async () => {
+    try {
+      // Get reference
+      const listingRef = collection(db, "listings");
+
+      // Create a query
+      const q = query(
+        listingRef,
+        where("type", "==", params.categoryName),
+        orderBy("timestamp", "desc"),
+        startAfter(lastFetchedListing),
+        limit(fetchLimit)
+      );
+
+      // Execute query
+      const querySnap = await getDocs(q);
+
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+      setLastFetchedListing(lastVisible);
+
+      const listingsArr = [];
+      querySnap.forEach((doc) => {
+        return listingsArr.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      totalListings > listings.length + listingsArr.length
+        ? setLoadMore(true)
+        : setLoadMore(false);
+      setListings([...listings, ...listingsArr]);
+      setLoading(false);
+    } catch (error) {
+      toast.error("Could not fetch listings");
+    }
+  };
 
   return (
     <div className="category">
@@ -80,6 +139,12 @@ function Category() {
               ))}
             </ul>
           </main>
+          <br />
+          {loadMore && (
+            <p className="loadMore" onClick={() => onFetchMoreListings()}>
+              Load More
+            </p>
+          )}
         </>
       ) : (
         <p>No listings for {params.categoryName}</p>

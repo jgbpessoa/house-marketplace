@@ -137,6 +137,18 @@ button {
 .pageHeader {
   font-size: 2rem;
   font-weight: 800;
+  position: relative;
+}
+
+.pageHeader::after {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  content: "";
+  width: 100%;
+  height: 4px;
+  background-color: #00cc66;
+  z-index: -1;
 }
 
 .navbar {

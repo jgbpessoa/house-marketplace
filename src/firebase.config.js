@@ -1,7 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
-import { connectAuthEmulator, getAuth } from "firebase/auth";
-import { getStorage, connectStorageEmulator } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
+
+// Use Firebase Emulator
+// import {connectFirestoreEmulator} from "firebase/firestore";
+// import { connectAuthEmulator, getAuth } from "firebase/auth";
+// import { getStorage, connectStorageEmulator } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,7 +20,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 export const db = getFirestore();
 
-// Use Fireebase Emulator
+// Use Firebase Emulator
 // export const auth = getAuth();
 // const storage = getStorage();
 

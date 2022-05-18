@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import {
   collection,
   getDocs,
@@ -22,7 +21,6 @@ function Offers() {
   const [loadMore, setLoadMore] = useState(false);
 
   const fetchLimit = 5;
-  const params = useParams();
 
   useEffect(() => {
     const fetchListings = async () => {

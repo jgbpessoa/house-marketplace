@@ -75,14 +75,14 @@ button {
 .removeIcon {
   cursor: pointer;
   position: absolute;
-  top: -3%;
-  right: -2%;
+  top: 30%;
+  left: -40px;
 }
 .editIcon {
   cursor: pointer;
   position: absolute;
-  top: -3.4%;
-  right: 20px;
+  top: 55%;
+  left: -40px;
 }
 
 .pageContainer,
@@ -231,9 +231,13 @@ button {
   text-align: right;
 }
 
+.signInPadding {
+  padding-bottom: 4rem;
+}
+
 .signInBar,
 .signUpBar {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -277,7 +281,7 @@ button {
 }
 
 .socialLogin {
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -302,7 +306,7 @@ button {
 }
 
 .registerLink {
-  margin-top: 4rem;
+  margin-top: 2rem;
   color: #00cc66;
   font-weight: 600;
   text-align: center;
@@ -322,6 +326,7 @@ button {
 
 .exploreHeading,
 .exploreCategoryHeading {
+  font-size: 1.1rem;
   font-weight: 700;
 }
 
@@ -477,13 +482,24 @@ button {
 
 .categoryListingInfoDiv {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 10px;
   max-width: 275px;
 }
 
 .categoryListingInfoText {
   font-weight: 500;
   font-size: 0.7rem;
+}
+
+.mobileView {
+  display: none;
+}
+
+@media screen and (min-width: 400px) {
+  .mobileView {
+    display: inline;
+  }
 }
 
 .loadMore {
@@ -552,17 +568,31 @@ button {
 }
 
 .listingDetailsList {
-  padding: 0;
+  margin-top: 1.6rem;
+  padding: 1rem;
   list-style-type: none;
+  background-color: #e8e8e8;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  border: solid #00cc66 3px;
 }
 .listingDetailsList li {
+  flex: 0 0 140px;
   margin: 0.3rem 0;
   font-weight: 500;
   opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .listingLocationTitle {
-  margin-top: 2rem;
+  margin: 1.5rem 0;
   font-weight: 600;
   font-size: 1.25rem;
 }

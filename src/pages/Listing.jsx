@@ -9,6 +9,10 @@ import "swiper/css/bundle";
 import { db } from "../firebase.config";
 import Spinner from "../components/Spinner";
 import ShareIcon from "../assets/svg/shareIcon.svg";
+import bedIcon from "../assets/svg/bedIcon.svg";
+import bathtubIcon from "../assets/svg/bathtubIcon.svg";
+import parkingIcon from "../assets/svg/parkingIcon.svg";
+import furnishedIcon from "../assets/svg/furnishedIcon.svg";
 
 function Listing() {
   const [listing, setListing] = useState(null);
@@ -99,17 +103,33 @@ function Listing() {
 
         <ul className="listingDetailsList">
           <li>
+            <img src={bedIcon} alt="bedroom" />
             {listing.bedrooms > 1
               ? `${listing.bedrooms} Bedrooms`
               : "1 Bedroom"}
           </li>
           <li>
+            <img src={bathtubIcon} alt="bathroom" />
             {listing.bathrooms > 1
               ? `${listing.bathrooms} Bathrooms`
               : "1 Bathroom"}
           </li>
-          <li>{listing.parking && "Parking Spot"}</li>
-          <li>{listing.furnished && "Furnished"}</li>
+          {listing.parking && (
+            <li>
+              <img src={parkingIcon} style={{ height: "22px" }} alt="parking" />
+              Parking Spot
+            </li>
+          )}
+          {listing.furnished && (
+            <li>
+              <img
+                src={furnishedIcon}
+                style={{ height: "18px" }}
+                alt="furnished"
+              />
+              Furnished
+            </li>
+          )}
         </ul>
 
         <p className="listingLocationTitle">Location</p>

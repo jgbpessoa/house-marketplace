@@ -48,7 +48,7 @@ function SignIn() {
           <p className="pageHeader">Welcome Back!</p>
         </header>
 
-        <main>
+        <main className="signInPadding">
           <form onSubmit={onSubmit}>
             <input
               type="email"

@@ -33,15 +33,21 @@ function ListingItem({ listing, id, onDelete, onEdit }) {
           <div className="categoryListingInfoDiv">
             <img src={bedIcon} alt="bedrooms" />
             <p className="categoryListingInfoText">
-              {listing.bedrooms > 1
-                ? `${listing.bedrooms} Bedrooms`
-                : "1 Bedroom"}
+              {listing.bedrooms}
+              {listing.bedrooms > 1 ? (
+                <span className="mobileView"> Bedrooms</span>
+              ) : (
+                <span className="mobileView"> Bedroom</span>
+              )}
             </p>
             <img src={bathtubIcon} alt="bathroom" />
             <p className="categoryListingInfoText">
-              {listing.bathrooms > 1
-                ? `${listing.bathrooms} Bathrooms`
-                : "1 Bathroom"}
+              {listing.bathrooms}
+              {listing.bathrooms > 1 ? (
+                <span className="mobileView"> Bathrooms</span>
+              ) : (
+                <span className="mobileView"> Bathroom</span>
+              )}
             </p>
           </div>
         </div>

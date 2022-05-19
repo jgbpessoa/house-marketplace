@@ -78,7 +78,7 @@ function Slider() {
                 <p className="swiperSlidePrice">
                   $
                   {data.discountedPrice
-                    .toString()
+                    ?.toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",") ??
                     data.regularPrice
                       .toString()
